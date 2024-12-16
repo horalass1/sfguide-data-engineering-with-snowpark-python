@@ -47,4 +47,4 @@ jobs:
           SNOWFLAKE_CONNECTIONS_DEFAULT_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
           SNOWFLAKE_CONNECTIONS_DEFAULT_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
 
-        run:  python deploy_snowpark_apps.py $GITHUB_WORKSPACE
+        run:   echo $SNOWFLAKE_CONNECTIONS_DEFAULT_ACCOUNT && python deploy_snowpark_apps.py $GITHUB_WORKSPACE
