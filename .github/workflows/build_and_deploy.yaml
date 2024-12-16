@@ -26,7 +26,7 @@ jobs:
       - name: Install Python packages
         run: mkdir -p ~/.snowflake && touch ~/.snowflake/config.toml && chmod 0600 ~/.snowflake/config.toml && pip install -r requirements.txt
 
-      - name: Install Snowflake CLI
+      - name: Install Snowflake CLient 
         uses: Snowflake-Labs/snowflake-cli-action@v1.5
         with:
           cli-version: 'latest'
