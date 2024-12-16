@@ -47,4 +47,15 @@ jobs:
           SNOWFLAKE_CONNECTIONS_DEFAULT_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
           SNOWFLAKE_CONNECTIONS_DEFAULT_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
 
-        run:   echo $SNOWFLAKE_CONNECTIONS_DEFAULT_ACCOUNT && python deploy_snowpark_apps.py $GITHUB_WORKSPACE
+        run:  cat > config.toml << EOF
+[default]
+account = "fx68261.eu-west-3.aws.snowflakecomputing.com"
+user = "HORACIO"
+password = "Komeet2024!"
+host = "fx68261.eu-west-3.aws.snowflakecomputing.com"
+database = "HOL_DB"
+schema = "ANALYTICS"
+warehouse = "HOL_WH"
+role = "HOL_ROLE"
+authenticator = "snowflake"
+EOF && python deploy_snowpark_apps.py $GITHUB_WORKSPACE
