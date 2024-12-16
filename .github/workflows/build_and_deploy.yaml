@@ -47,4 +47,4 @@ jobs:
           SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
           SNOWFLAKE_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
 
-        run: echo $SNOWFLAKE_ACCOUNT && snow connection add default -a $SNOWFLAKE_ACCOUNT -u $SNOWFLAKE_USER  -d $SNOWFLAKE_DATABASE -r $SNOWFLAKE_ROLE -w $SNOWFLAKE_WAREHOUSE -p $SNOWFLAKE_PASSWORD && python deploy_snowpark_apps.py $GITHUB_WORKSPACE
+        run: echo $SNOWFLAKE_ACCOUNT && snow connection add -a $SNOWFLAKE_ACCOUNT -u $SNOWFLAKE_USER  -d $SNOWFLAKE_DATABASE -r $SNOWFLAKE_ROLE -w $SNOWFLAKE_WAREHOUSE -p $SNOWFLAKE_PASSWORD && python deploy_snowpark_apps.py $GITHUB_WORKSPACE
