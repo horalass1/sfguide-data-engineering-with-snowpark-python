@@ -42,7 +42,7 @@ jobs:
           SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
           SNOWFLAKE_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
         run: |
-          cat > .snowflake/config.toml << EOF
+          cat > config.toml << EOF
           [connections.default]
           accountname = "${SNOWFLAKE_ACCOUNT}"
           username = "${SNOWFLAKE_USER}"
