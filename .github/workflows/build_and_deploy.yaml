@@ -27,7 +27,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Install Snowflake CLI
-        uses: Snowflake-Labs/snowflake-cli-action@v1
+        uses: Snowflake-Labs/snowflake-cli-action
         with:
           cli-version: 'latest' 
 
