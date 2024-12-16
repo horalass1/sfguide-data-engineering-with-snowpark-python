@@ -42,5 +42,5 @@ jobs:
           SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
           SNOWFLAKE_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
         run: |
-          echo SNOWFLAKE_SCHEMA
+          echo $SNOWFLAKE_SCHEMA
           python deploy_snowpark_apps.py $GITHUB_WORKSPACE
