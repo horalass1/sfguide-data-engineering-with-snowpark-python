@@ -42,15 +42,5 @@ jobs:
           SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
           SNOWFLAKE_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
         run: |
-          cat > ~/.snowflake/config.toml << EOF
-          [default]
-          SNOWFLAKE_ACCOUNT = "${SNOWFLAKE_ACCOUNT}"
-          SNOWFLAKE_USER = "${SNOWFLAKE_USER}"
-          SNOWFLAKE_PASSWORD = "${SNOWFLAKE_PASSWORD}"
-          SNOWFLAKE_DATABASE = "${SNOWFLAKE_DATABASE}"
-          SNOWFLAKE_SCHEMA = "${SNOWFLAKE_SCHEMA}"
-          SNOWFLAKE_WAREHOUSE = "${SNOWFLAKE_WAREHOUSE}"
-          SNOWFLAKE_ROLE = "${SNOWFLAKE_ROLE}"
-          EOF
-          snow --version
+          echo SNOWFLAKE_SCHEMA
           python deploy_snowpark_apps.py $GITHUB_WORKSPACE
