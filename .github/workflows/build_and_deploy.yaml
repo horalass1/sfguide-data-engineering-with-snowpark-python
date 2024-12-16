@@ -24,7 +24,7 @@ jobs:
           python-version: '3.10'
 
       - name: Install Python packages
-        run: pip install -r requirements.txt
+        run: mkdir -p ~/.snowflake && pip install -r requirements.txt
 
       - name: Install Snowflake CLI
         uses: Snowflake-Labs/snowflake-cli-action@v1.5
