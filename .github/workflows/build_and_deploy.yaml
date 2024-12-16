@@ -30,7 +30,7 @@ jobs:
         uses: Snowflake-Labs/snowflake-cli-action@v1.5
         with:
           cli-version: 'latest'
-          default-config-file-path: ".config.toml" 
+          default-config-file-path: ".snowflake/config.toml" 
 
       - name: Run Snowflake commands
         run: |
@@ -39,12 +39,12 @@ jobs:
 
       - name: Deploy Snowpark apps
         env:
-          SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
-          SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
-          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
-          SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
-          SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
-          SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
-          SNOWFLAKE_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
+          SNOWFLAKE_CONNECTIONS_DEFAULT_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+          SNOWFLAKE_CONNECTIONS_DEFAULT_USER: ${{ secrets.SNOWFLAKE_USER }}
+          SNOWFLAKE_CONNECTIONS_DEFAULT_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+          SNOWFLAKE_CONNECTIONS_DEFAULT_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+          SNOWFLAKE_CONNECTIONS_DEFAULT_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+          SNOWFLAKE_CONNECTIONS_DEFAULT_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
+          SNOWFLAKE_CONNECTIONS_DEFAULTSCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
 
-        run: echo $SNOWFLAKE_ACCOUNT && snow connection add -a $SNOWFLAKE_ACCOUNT -u $SNOWFLAKE_USER  -d $SNOWFLAKE_DATABASE -r $SNOWFLAKE_ROLE -w $SNOWFLAKE_WAREHOUSE -p $SNOWFLAKE_PASSWORD && python deploy_snowpark_apps.py $GITHUB_WORKSPACE
+        run:  python deploy_snowpark_apps.py $GITHUB_WORKSPACE
