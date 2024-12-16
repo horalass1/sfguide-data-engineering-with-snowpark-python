@@ -30,32 +30,27 @@ jobs:
         uses: Snowflake-Labs/snowflake-cli-action@v1.5
         with:
           cli-version: 'latest'
-          default-config-file-path: ".snowflake/config.toml" 
-
-      - name: Run Snowflake commands
-        run: |
-          snow --version 
-          # Add your Snowflake CLI commands here
+          # Remove default-config-file-path here
 
       - name: Deploy Snowpark apps
         env:
-          SNOWFLAKE_CONNECTIONS_DEFAULT_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
-          SNOWFLAKE_CONNECTIONS_DEFAULT_USER: ${{ secrets.SNOWFLAKE_USER }}
-          SNOWFLAKE_CONNECTIONS_DEFAULT_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
-          SNOWFLAKE_CONNECTIONS_DEFAULT_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
-          SNOWFLAKE_CONNECTIONS_DEFAULT_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
-          SNOWFLAKE_CONNECTIONS_DEFAULT_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
-          SNOWFLAKE_CONNECTIONS_DEFAULT_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
-
-        run:  cat > config.toml << EOF
-[default]
-account = "fx68261.eu-west-3.aws.snowflakecomputing.com"
-user = "HORACIO"
-password = "Komeet2024!"
-host = "fx68261.eu-west-3.aws.snowflakecomputing.com"
-database = "HOL_DB"
-schema = "ANALYTICS"
-warehouse = "HOL_WH"
-role = "HOL_ROLE"
-authenticator = "snowflake"
-EOF && python deploy_snowpark_apps.py $GITHUB_WORKSPACE
+          SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+          SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+          SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+          SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+          SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
+          SNOWFLAKE_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
+        run: |
+          cat > .snowflake/config.toml << EOF
+          [connections.default]
+          accountname = "${SNOWFLAKE_ACCOUNT}"
+          username = "${SNOWFLAKE_USER}"
+          password = "${SNOWFLAKE_PASSWORD}"
+          dbname = "${SNOWFLAKE_DATABASE}"
+          schemaname = "${SNOWFLAKE_SCHEMA}"
+          warehousename = "${SNOWFLAKE_WAREHOUSE}"
+          rolename = "${SNOWFLAKE_ROLE}"
+          EOF
+          snow --version
+          python deploy_snowpark_apps.py $GITHUB_WORKSPACE
