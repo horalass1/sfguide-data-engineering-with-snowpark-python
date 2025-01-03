@@ -42,7 +42,11 @@ jobs:
           SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
           SNOWFLAKE_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
         run: |
-          snow connection add --connection-name default --accountname ${{ secrets.SNOWFLAKE_ACCOUNT }} --username ${{ secrets.SNOWFLAKE_USER }} --password ${{ secrets.SNOWFLAKE_PASSWORD }} --database DEV --schema PUBLIC --warehouse COMPUTE_WH --role ACCOUNTADMIN --host ${{ secrets.SNOWFLAKE_ACCOUNT }} --port 443 --region eu-west-3 --authenticator snowflake --no-interactive
+      database: "hol_db"
+      database: "hol_db"
+      database: "hol_db"
+      database: "hol_db"
+          snow connection add --connection-name default --accountname ${{ secrets.SNOWFLAKE_ACCOUNT }} --username ${{ secrets.SNOWFLAKE_USER }} --password ${{ secrets.SNOWFLAKE_PASSWORD }} --database hol_db --schema analytics --warehouse COMPUTE_WH --role ACCOUNTADMIN --host ${{ secrets.SNOWFLAKE_ACCOUNT }} --port 443 --region eu-west-3 --authenticator snowflake --no-interactive
           cat /home/runner/.snowflake/config.toml
           curl -v https://${{ secrets.SNOWFLAKE_ACCOUNT }} 2>&1 | tee | grep "Trying\|Connected\|Establish\|CONNECT\|subject\|issuer\|HTTP\|curl"
           cd steps/05_fahrenheit_to_celsius_udf
