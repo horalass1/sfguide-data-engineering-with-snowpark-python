@@ -42,5 +42,5 @@ jobs:
           SNOWFLAKE_CONNECTIONS_DEFAULT_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
           SNOWFLAKE_CONNECTIONS_DEFAULT_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
         run: |
-          echo $SNOWFLAKE_SCHEMA
+          snow connection add --connection-name default --accountname ${{ secrets.SNOWFLAKE_ACCOUNT }} --username ${{ secrets.SNOWFLAKE_USER }} --password ${{ secrets.SNOWFLAKE_PASSWORD }} --database=DEV --schema=PUBLIC --warehouse=COMPUTE_WH
           python deploy_snowpark_apps.py $GITHUB_WORKSPACE
