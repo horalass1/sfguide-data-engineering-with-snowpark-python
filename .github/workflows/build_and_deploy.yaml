@@ -47,4 +47,4 @@ jobs:
           curl -v https://${{ secrets.SNOWFLAKE_ACCOUNT }} 2>&1 | tee | grep "Trying\|Connected\|Establish\|CONNECT\|subject\|issuer\|HTTP\|curl"
           cd steps/05_fahrenheit_to_celsius_udf
           snow snowpark build
-          snow snowpark deploy
+          snow snowpark deploy --replace
